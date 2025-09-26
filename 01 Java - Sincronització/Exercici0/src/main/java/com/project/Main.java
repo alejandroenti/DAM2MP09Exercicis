@@ -5,42 +5,57 @@ import java.util.concurrent.Executors;
 
 public class Main {
 
+    static final int NUM_MICROSERVICES = 3;
+
     public static void main(String[] args) {
         
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
-        Runnable systemEvents = new Runnable() {
-            
+        CyclicBarrier barrier = new CyclicBarrier(NUM_MICROSERVICES, new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(1000);
-                    System.out.println("Event del sistema enregistrat");
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                System.out.println("Tots els microserveis han acabat. Combinant els resultats...");
+            }
+        });
+
+        ExecutorService executor = Executors.newFixedThreadPool(NUM_MICROSERVICES);
+
+        Random rand = new Random();
+
+        Runnable microServiceReadMemory = () -> {
+            try {
+                System.out.println("Microservei de comprovació de memòria iniciat...");
+                Thread.sleep(rand.nextInt(1000, 5000));
+                System.out.println("Microservei de comprovació de memòria completat.");
+                barrier.await(); // Esperem que els altres fils acabin
+            } catch (InterruptedException | BrokenBarrierException e) {
+                e.printStackTrace();
             }
         };
 
-        Runnable networkStatus = new Runnable() {
-            
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    System.out.println("Tenim problemes amb la xarxa!");
-                    System.out.println("Sortint del sistema...");
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+        Runnable microServiceCheckDiskNodes = () -> {
+            try {
+                System.out.println("Microservei de lectura de nodes del disc dur iniciat...");
+                Thread.sleep(rand.nextInt(3000, 10000));
+                System.out.println("Microservei de lectura de nodes del disc completat.");
+                barrier.await(); // Esperem que els altres fils acabin
+            } catch (InterruptedException | BrokenBarrierException e) {
+                e.printStackTrace();
             }
         };
 
-        executor.execute(systemEvents);
-        executor.execute(networkStatus);
+        Runnable microServiceNetworkStatus = () -> {
+            try {
+                System.out.println("Microservei de comprovació de xarxa iniciat...");
+                Thread.sleep(rand.nextInt(500, 2000));
+                System.out.println("Microservei de comprovació de xarxa completat.");
+                barrier.await(); // Esperem que els altres fils acabin
+            } catch (InterruptedException | BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+        };
+
+        executor.execute(microServiceReadMemory);
+        executor.execute(microServiceCheckDiskNodes);
+        executor.execute(microServiceNetworkStatus);
 
         executor.shutdown();
     }
