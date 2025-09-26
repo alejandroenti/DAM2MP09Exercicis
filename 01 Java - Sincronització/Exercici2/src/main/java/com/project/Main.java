@@ -1,65 +1,33 @@
 package com.project;
 
 import java.util.Random;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
 public class Main {
 
-    static final int NUM_MICROSERVICES = 3;
+    static final int NUM_MICROSERVICES = 5;
+    static final int NUM_TASKS = 30;
 
     public static void main(String[] args) {
-        
-        CyclicBarrier barrier = new CyclicBarrier(NUM_MICROSERVICES, new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Tots els microserveis han acabat. Combinant els resultats...");
-            }
-        });
+
+        ParkingLot parkingLot = new ParkingLot();
+        Random rand = new Random();
+        CountDownLatch done = new CountDownLatch(NUM_TASKS);
 
         ExecutorService executor = Executors.newFixedThreadPool(NUM_MICROSERVICES);
 
-        Random rand = new Random();
+        for (int i = 0; i < NUM_TASKS; i++) {
+            executor.execute(new Task(i, parkingLot.getSemaphore(), rand, done));
+        }
 
-        Runnable microServiceReadMemory = () -> {
-            try {
-                System.out.println("Microservei de comprovació de memòria iniciat...");
-                Thread.sleep(rand.nextInt(1000, 5000));
-                System.out.println("Microservei de comprovació de memòria completat.");
-                barrier.await(); // Esperem que els altres fils acabin
-            } catch (InterruptedException | BrokenBarrierException e) {
-                e.printStackTrace();
-            }
-        };
-
-        Runnable microServiceCheckDiskNodes = () -> {
-            try {
-                System.out.println("Microservei de lectura de nodes del disc dur iniciat...");
-                Thread.sleep(rand.nextInt(3000, 10000));
-                System.out.println("Microservei de lectura de nodes del disc completat.");
-                barrier.await(); // Esperem que els altres fils acabin
-            } catch (InterruptedException | BrokenBarrierException e) {
-                e.printStackTrace();
-            }
-        };
-
-        Runnable microServiceNetworkStatus = () -> {
-            try {
-                System.out.println("Microservei de comprovació de xarxa iniciat...");
-                Thread.sleep(rand.nextInt(500, 2000));
-                System.out.println("Microservei de comprovació de xarxa completat.");
-                barrier.await(); // Esperem que els altres fils acabin
-            } catch (InterruptedException | BrokenBarrierException e) {
-                e.printStackTrace();
-            }
-        };
-
-        executor.execute(microServiceReadMemory);
-        executor.execute(microServiceCheckDiskNodes);
-        executor.execute(microServiceNetworkStatus);
-
-        executor.shutdown();
+        try {
+            done.await(); // espera que totes acabin
+            executor.shutdown();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }
