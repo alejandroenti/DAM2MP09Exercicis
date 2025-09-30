@@ -6,6 +6,7 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.CountDownLatch;
 
 public class Main {
 
@@ -19,10 +20,10 @@ public class Main {
     public static void main(String[] args) {
 
         rand = new Random();
+        CountDownLatch done = new CountDownLatch(2);
 
-        
         int[] numbers = FillArrayOfIntegers();
-        
+
         CyclicBarrier barrier = new CyclicBarrier(NUM_PROCESSES, new Runnable() {
             @Override
             public void run() {
@@ -38,11 +39,11 @@ public class Main {
 
         Runnable microServiceSumatory = () -> {
             try {
-                
                 for (int i = 0; i < numbers.length; i++) {
                     sumatory += numbers[i];
                 }
 
+                done.countDown();
                 barrier.await(); // Esperem que els altres fils acabin
             } catch (InterruptedException | BrokenBarrierException e) {
                 e.printStackTrace();
@@ -51,13 +52,9 @@ public class Main {
 
         Runnable microServiceAverage = () -> {
             try {
-                int total = 0;
+                average = (float) sumatory / numbers.length;
 
-                for (int i = 0; i < numbers.length; i++) {
-                    total += numbers[i];
-                }
-
-                average = (float)total / numbers.length;
+                done.countDown();
                 barrier.await(); // Esperem que els altres fils acabin
             } catch (InterruptedException | BrokenBarrierException e) {
                 e.printStackTrace();
@@ -66,22 +63,15 @@ public class Main {
 
         Runnable microServiceStandardDeviation = () -> {
             try {
-
-                int total = 0;
                 float totalDiffSquared = 0;
 
                 for (int i = 0; i < numbers.length; i++) {
-                    total += numbers[i];
-                }
-
-                float avg = (float)total / numbers.length;
-
-                for (int i = 0; i < numbers.length; i++) {
-                    totalDiffSquared += Math.pow(numbers[i] - avg, 2);
+                    totalDiffSquared += Math.pow(numbers[i] - average, 2);
                 }
 
                 stdDeviation = (float) Math.sqrt(totalDiffSquared / (numbers.length - 1));
 
+                done.countDown();
                 barrier.await(); // Esperem que els altres fils acabin
             } catch (InterruptedException | BrokenBarrierException e) {
                 e.printStackTrace();
