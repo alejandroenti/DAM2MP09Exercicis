@@ -1,12 +1,15 @@
-const Board = require('./domain/boards/Board')
+const Board = require("./domain/boards/Board");
+const MenuTerminal = require("./infrastructure/menus/MenuTerminal");
+const Menu = require("./infrastructure/menus/MenuTerminal")
 
 let board = new Board(8, 6, 16)
-board.initializeBoard()
-
-let isPlaying = true
+let menu = new MenuTerminal()
 
 
+board.initializeBoard();
 
-for (let i = 0; i < 16; i++) {
-  console.log(board.treasures.at(i))
+let isPlaying = true;
+
+while (isPlaying) {
+  await menu.show()
 }
