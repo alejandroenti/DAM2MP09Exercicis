@@ -13,7 +13,7 @@ app.get('/', getHello)
 
 const httpServer = app.listen(port, appListen)
 function appListen () {
-    console.log(`Example app listening on: http://0.0.0.0:${port}`)
+    console.log(`API Server Listening on: http://0.0.0.0:${port}`)
 }
 
 process.on('SIGTERM', shutDown);
