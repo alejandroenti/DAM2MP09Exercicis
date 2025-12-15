@@ -5,8 +5,8 @@ const port = 3000
 
 app.use(express.static('public'))
 
-app.get('/', getHello)
-    async function getHello (req, res) {
+app.get('/categories', getCategories)
+    async function getCategories (req, res) {
     res.send(`Hello World`)
 }
 
