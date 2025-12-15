@@ -2,14 +2,17 @@
   "name": "exercici03",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./server/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch --watch-path ./server ./server/app.js",
+    "pm2start": "pm2 start ./server/app.js",
+    "pm2list": "pm2 list",
+    "pm2stop": "pm2 delete app",
+    "pm2logs": "pm2 logs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "express": "^5.2.1",
     "pm2": "^6.0.14"
