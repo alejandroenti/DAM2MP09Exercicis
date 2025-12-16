@@ -1,0 +1,254 @@
+{
+  "Madrid": [
+    {
+      "playerName": "Thibaut Nicolas Marc Courtois",
+      "position": "Goalkeeper",
+      "height": 2.00,
+      "weigth": 96,
+      "age": 33,
+      "nationality": "Belgium",
+      "squadNumber": 1,
+      "kitName": "COURTOIS"
+    },
+    {
+      "playerName": "Andriy Lunin",
+      "position": "Goalkeeper",
+      "height": 1.91,
+      "weigth": 83,
+      "age": 26,
+      "nationality": "Ukraine",
+      "squadNumber": 13,
+      "kitName": "LUNIN"
+    },
+    {
+      "playerName": "Daniel Carvajal Ramos",
+      "position": "Defender",
+      "height": 1.73,
+      "weigth": 73,
+      "age": 33,
+      "nationality": "Spain",
+      "squadNumber": 2,
+      "kitName": "CARVAJAL"
+    },
+    {
+      "playerName": "Éder Gabriel Militão",
+      "position": "Defender",
+      "height": 1.86,
+      "weigth": 78,
+      "age": 27,
+      "nationality": "Brazil",
+      "squadNumber": 3,
+      "kitName": "E. MILITAO"
+    },
+    {
+      "playerName": "David Olatukunbo Alaba",
+      "position": "Defender",
+      "height": 1.80,
+      "weigth": 78,
+      "age": 33,
+      "nationality": "Austria",
+      "squadNumber": 4,
+      "kitName": "ALABA"
+    },
+    {
+      "playerName": "Trent John Alexander-Arnold",
+      "position": "Defender",
+      "height": 1.80,
+      "weigth": 78,
+      "age": 27,
+      "nationality": "England",
+      "squadNumber": 12,
+      "kitName": "TRENT"
+    },
+    {
+      "playerName": "Raúl Asencio del Rosario",
+      "position": "Defender",
+      "height": 1.84,
+      "weigth": 85,
+      "age": 22,
+      "nationality": "Spain",
+      "squadNumber": 17,
+      "kitName": "ASENCIO"
+    },
+    {
+      "playerName": "Álvaro Fernández Carreras",
+      "position": "Defender",
+      "height": 1.86,
+      "weigth": 75,
+      "age": 22,
+      "nationality": "Spain",
+      "squadNumber": 18,
+      "kitName": "A. CARRERAS"
+    },
+    {
+      "playerName": "Francisco José García Torres",
+      "position": "Defender",
+      "height": 1.69,
+      "weigth": 63,
+      "age": 26,
+      "nationality": "Spain",
+      "squadNumber": 20,
+      "kitName": "FRAN GARCÍA"
+    },
+    {
+      "playerName": "Antonio Rüdiger",
+      "position": "Defender",
+      "height": 1.90,
+      "weigth": 86,
+      "age": 32,
+      "nationality": "Germany",
+      "squadNumber": 22,
+      "kitName": "RÜDIGER"
+    },
+    {
+      "playerName": "Ferland Sinna Mendy",
+      "position": "Defender",
+      "height": 1.80,
+      "weigth": 73,
+      "age": 30,
+      "nationality": "France",
+      "squadNumber": 23,
+      "kitName": "MENDY"
+    },
+    {
+      "playerName": "Dean Donny Huijsen",
+      "position": "Defender",
+      "height": 1.96,
+      "weigth": 86,
+      "age": 20,
+      "nationality": "Spain",
+      "squadNumber": 24,
+      "kitName": "HUIJSEN"
+    },
+    {
+      "playerName": "Jude Victor William Bellingham",
+      "position": "Midfielder",
+      "height": 1.86,
+      "weigth": 75,
+      "age": 22,
+      "nationality": "England",
+      "squadNumber": 5,
+      "kitName": "BELLINGHAM"
+    },
+    {
+      "playerName": "Eduardo Celmi Camavinga",
+      "position": "Midfielder",
+      "height": 1.83,
+      "weigth": 86,
+      "age": 23,
+      "nationality": "France",
+      "squadNumber": 6,
+      "kitName": "CAMAVINGA"
+    },
+    {
+      "playerName": "Federico Santiago Valverde Dipetta",
+      "position": "Midfielder",
+      "height": 1.82,
+      "weigth": 78,
+      "age": 27,
+      "nationality": "Uruguay",
+      "squadNumber": 8,
+      "kitName": "VALVERDE"
+    },
+    {
+      "playerName": "Aurélien Djani Tchouameni",
+      "position": "Midfielder",
+      "height": 1.88,
+      "weigth": 82,
+      "age": 25,
+      "nationality": "France",
+      "squadNumber": 14,
+      "kitName": "TCHOUAMENI"
+    },
+    {
+      "playerName": "Arda Güler",
+      "position": "Midfielder",
+      "height": 1.75,
+      "weigth": 70,
+      "age": 20,
+      "nationality": "Turkey",
+      "squadNumber": 15,
+      "kitName": "ARDA GÜLER"
+    },
+    {
+      "playerName": "Daniel Ceballos Fernández",
+      "position": "Midfielder",
+      "height": 1.79,
+      "weigth": 70,
+      "age": 29,
+      "nationality": "Spain",
+      "squadNumber": 19,
+      "kitName": "D. CEBALLOS"
+    },
+    {
+      "playerName": "Vinicius José Paixão de Oliveira Junior",
+      "position": "Forward",
+      "height": 1.76,
+      "weigth": 73,
+      "age": 25,
+      "nationality": "Brazil",
+      "squadNumber": 7,
+      "kitName": "VINI JR."
+    },
+    {
+      "playerName": "Kylian Mbappé Lottin",
+      "position": "Forward",
+      "height": 1.82,
+      "weigth": 81,
+      "age": 27,
+      "nationality": "France",
+      "squadNumber": 10,
+      "kitName": "MBAPPÉ"
+    },
+    {
+      "playerName": "Endrick Felipe Moreira de Sousa",
+      "position": "Forward",
+      "height": 1.73,
+      "weigth": 67,
+      "age": 19,
+      "nationality": "Brazil",
+      "squadNumber": 9,
+      "kitName": "ENDRICK"
+    },
+    {
+      "playerName": "Rodrygo Silva de Goes",
+      "position": "Forward",
+      "height": 1.74,
+      "weigth": 64,
+      "age": 24,
+      "nationality": "Brazil",
+      "squadNumber": 11,
+      "kitName": "RODRYGO"
+    },
+    {
+      "playerName": "Gonzalo García Torres",
+      "position": "Forward",
+      "height": 1.82,
+      "weigth": 81,
+      "age": 21,
+      "nationality": "Spain",
+      "squadNumber": 16,
+      "kitName": "GONZALO"
+    },
+    {
+      "playerName": "Brahim Abdelkader Díaz",
+      "position": "Forward",
+      "height": 1.70,
+      "weigth": 68,
+      "age": 26,
+      "nationality": "Morocco",
+      "squadNumber": 21,
+      "kitName": "BRAHIM"
+    },
+    {
+      "playerName": "Franco Mastantuono",
+      "position": "Forward",
+      "height": 1.78,
+      "weigth": 74,
+      "age": 18,
+      "nationality": "Argentina",
+      "squadNumber": 30,
+      "kitName": "MASTANTUONO"
+    }
+  ]
+}
