@@ -8,7 +8,7 @@ const categories = require(path.join(__dirname, "data", "categories.json"));
 
 app.use(express.static('public'))
 
-app.get('/categories', getCategories)
+app.post('/categories', getCategories)
     async function getCategories (req, res) {
     res.send(categories)
 }
