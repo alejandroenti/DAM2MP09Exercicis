@@ -37,7 +37,7 @@
   "Valencia": {
     "fullName": "Valencia Club de Fútbol",
     "image": "/public/categories/valencia.jpg",
-    "background": ["#000000", "#F6A800"]
+    "background": ["#F6A800", "#000000"]
   },
   "Girona": {
     "fullName": "Girona Futbol Club",
