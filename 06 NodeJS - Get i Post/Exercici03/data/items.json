@@ -1,0 +1,314 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "categoria": "Accio",
+      "nom": "Mad Max: Fury Road",
+      "director": "George Miller",
+      "any": 2015,
+      "sinopsi": "En un futur postapocalíptic, una dona es rebel·la contra un tirà a la recerca de la seva llar amb l'ajuda d'un grup de presoneres i un buscavides anomenat Max.",
+      "plataformes": ["HBO Max", "Movistar+"],
+      "imatge": "/public/images/madmax.jpg"
+    },
+    {
+      "id": 2,
+      "categoria": "Accio",
+      "nom": "John Wick",
+      "director": "Chad Stahelski",
+      "any": 2014,
+      "sinopsi": "Un antic assassí a sou surt del seu retir per venjar-se dels gàngsters que li van prendre tot, deslligant una onada de violència imparable.",
+      "plataformes": ["Netflix", "Prime Video"],
+      "imatge": "/public/images/johnwick.jpg"
+    },
+    {
+      "id": 3,
+      "categoria": "Accio",
+      "nom": "The Dark Knight",
+      "director": "Christopher Nolan",
+      "any": 2008,
+      "sinopsi": "Batman s'enfronta al Joker, un criminal que busca sumir Gotham City en l'anarquia total i posar a prova l'ètica de l'heroi.",
+      "plataformes": ["HBO Max"],
+      "imatge": "/public/images/darkknight.jpg"
+    },
+    {
+      "id": 4,
+      "categoria": "Accio",
+      "nom": "Gladiator",
+      "director": "Ridley Scott",
+      "any": 2000,
+      "sinopsi": "Un general romà traït es converteix en gladiador per venjar la mort de la seva família i de l'emperador, lluitant fins arribar al Coliseu.",
+      "plataformes": ["Netflix", "Prime Video"],
+      "imatge": "/public/images/gladiator.jpg"
+    },
+    {
+      "id": 5,
+      "categoria": "Accio",
+      "nom": "Terminator 2",
+      "director": "James Cameron",
+      "any": 1991,
+      "sinopsi": "Un cyborg reprogramat arriba del futur per protegir el jove John Connor d'un nou i més avançat model de Terminator fet de metall líquid.",
+      "plataformes": ["Netflix", "Filmin"],
+      "imatge": "/public/images/terminator2.jpg"
+    },
+
+
+    {
+      "id": 6,
+      "categoria": "Comedia",
+      "nom": "Forrest Gump",
+      "director": "Robert Zemeckis",
+      "any": 1994,
+      "sinopsi": "La vida d'un home amb un coeficient intel·lectual baix que, sense voler-ho, presencia i influeix en diversos dels esdeveniments més importants de la història dels EUA.",
+      "plataformes": ["Netflix", "Prime Video"],
+      "imatge": "/public/images/forrest.jpg"
+    },
+    {
+      "id": 7,
+      "categoria": "Comedia",
+      "nom": "Superbad",
+      "director": "Greg Mottola",
+      "any": 2007,
+      "sinopsi": "Dos amics adolescents amb poca vida social intenten aconseguir alcohol per a una festa, vivint una nit d'errors absurds i situacions incòmodes.",
+      "plataformes": ["Netflix"],
+      "imatge": "/public/images/superbad.jpg"
+    },
+    {
+      "id": 8,
+      "categoria": "Comedia",
+      "nom": "The Grand Budapest Hotel",
+      "director": "Wes Anderson",
+      "any": 2014,
+      "sinopsi": "Un conserge llegendari d'un famós hotel europeu i el seu jove aprenent es veuen embolicats en el robatori d'una pintura renaixentista incalculable.",
+      "plataformes": ["Disney+"],
+      "imatge": "/public/images/budapest.jpg"
+    },
+    {
+      "id": 9,
+      "categoria": "Comedia",
+      "nom": "Life of Brian",
+      "director": "Terry Jones",
+      "any": 1979,
+      "sinopsi": "Brian neix el mateix dia que Jesucrist i és confós tota la seva vida amb el Messies en aquesta sàtira mítica dels Monty Python.",
+      "plataformes": ["Netflix"],
+      "imatge": "/public/images/brian.jpg"
+    },
+    {
+      "id": 10,
+      "categoria": "Comedia",
+      "nom": "The Big Lebowski",
+      "director": "Joel Coen",
+      "any": 1998,
+      "sinopsi": "Un home conegut com 'The Dude' és confós per uns matons amb un milionari, veient-se immers en un segrest tan absurd com divertit.",
+      "plataformes": ["Prime Video", "Filmin"],
+      "imatge": "/public/images/lebowski.jpg"
+    },
+
+
+    {
+      "id": 11,
+      "categoria": "Terror",
+      "nom": "Hereditary",
+      "director": "Ari Aster",
+      "any": 2018,
+      "sinopsi": "Després de la mort de la matriarca de la família Graham, la seva filla i nets comencen a desentranyar secrets críptics sobre els seus avantpassats.",
+      "plataformes": ["Prime Video", "Filmin"],
+      "imatge": "/public/images/hereditary.jpg"
+    },
+    {
+      "id": 12,
+      "categoria": "Terror",
+      "nom": "The Shining",
+      "director": "Stanley Kubrick",
+      "any": 1980,
+      "sinopsi": "Un escriptor s'instal·la amb la seva família en un hotel aïllat a les muntanyes, on una presència malèfica el porta cap a la bogeria.",
+      "plataformes": ["HBO Max"],
+      "imatge": "/public/images/shining.jpg"
+    },
+    {
+      "id": 13,
+      "categoria": "Terror",
+      "nom": "Get Out",
+      "director": "Jordan Peele",
+      "any": 2017,
+      "sinopsi": "Un jove afroamericà visita la família de la seva xicota blanca en una finca, descobrint una veritat pertorbadora darrere de la seva amabilitat.",
+      "plataformes": ["Netflix", "Prime Video"],
+      "imatge": "/public/images/getout.jpg"
+    },
+    {
+      "id": 14,
+      "categoria": "Terror",
+      "nom": "The Exorcist",
+      "director": "William Friedkin",
+      "any": 1973,
+      "sinopsi": "Dues sacerdots intenten deslliurar una nena de 12 anys d'una possessió demoníaca que posa a prova la seva fe i resistència física.",
+      "plataformes": ["HBO Max"],
+      "imatge": "/public/images/exorcist.jpg"
+    },
+    {
+      "id": 15,
+      "categoria": "Terror",
+      "nom": "A Quiet Place",
+      "director": "John Krasinski",
+      "any": 2018,
+      "sinopsi": "Una família ha de viure en silenci absolut per evitar ser caçada per unes criatures cegues que tenen una oïda ultrasensible.",
+      "plataformes": ["Netflix", "Prime Video"],
+      "imatge": "/public/images/quietplace.jpg"
+    },
+
+
+    {
+      "id": 16,
+      "categoria": "Ciencia Ficcio",
+      "nom": "Interstellar",
+      "director": "Christopher Nolan",
+      "any": 2014,
+      "sinopsi": "Un equip d'exploradors viatja a través d'un forat de cuc a l'espai en un intent per assegurar la supervivència de la humanitat.",
+      "plataformes": ["HBO Max", "Prime Video"],
+      "imatge": "/public/images/interstellar.jpg"
+    },
+    {
+      "id": 17,
+      "categoria": "Ciencia Ficcio",
+      "nom": "Blade Runner 2049",
+      "director": "Denis Villeneuve",
+      "any": 2017,
+      "sinopsi": "Un nou blade runner descobreix un secret ocult que podria sumir la societat en el caos, portant-lo a buscar el desaparegut Rick Deckard.",
+      "plataformes": ["Netflix", "Prime Video"],
+      "imatge": "/public/images/bladerunner.jpg"
+    },
+    {
+      "id": 18,
+      "categoria": "Ciencia Ficcio",
+      "nom": "Inception",
+      "director": "Christopher Nolan",
+      "any": 2010,
+      "sinopsi": "Un lladre especialitzat en l'art de l'extracció de secrets del subconscient ha de realitzar la tasca inversa: implantar una idea.",
+      "plataformes": ["HBO Max"],
+      "imatge": "/public/images/inception.jpg"
+    },
+    {
+      "id": 19,
+      "categoria": "Ciencia Ficcio",
+      "nom": "The Matrix",
+      "director": "Lana & Lilly Wachowski",
+      "any": 1999,
+      "sinopsi": "Un pirata informàtic descobreix que la realitat que coneix és una simulació creada per màquines per controlar la humanitat.",
+      "plataformes": ["HBO Max", "Movistar+"],
+      "imatge": "/public/images/matrix.jpg"
+    },
+    {
+      "id": 20,
+      "categoria": "Ciencia Ficcio",
+      "nom": "Arrival",
+      "director": "Denis Villeneuve",
+      "any": 2016,
+      "sinopsi": "Quan dotze naus espacials aterren a tot el món, una lingüista és contractada per intentar comunicar-se amb els visitants abans que esclati una guerra.",
+      "plataformes": ["Netflix", "Prime Video"],
+      "imatge": "/public/images/arrival.jpg"
+    },
+
+
+    {
+      "id": 21,
+      "categoria": "Drama",
+      "nom": "Toro Salvatge",
+      "director": "Martin Scorsese",
+      "any": 1980,
+      "sinopsi": "La història de Jake LaMotta, un boxejador l'ascens del qual al ring es veu enfosquit per la seva vida personal turbulenta.",
+      "plataformes": ["Filmin", "MUBI"],
+      "imatge": "/public/images/ragingbull.jpg"
+    },
+    {
+      "id": 22,
+      "categoria": "Drama",
+      "nom": "The Godfather",
+      "director": "Francis Ford Coppola",
+      "any": 1972,
+      "sinopsi": "L'envellit patriarca d'una dinastia del crim organitzat transfereix el control del seu imperi clandestí al seu fill renuent.",
+      "plataformes": ["Netflix", "Prime Video"],
+      "imatge": "/public/images/godfather.jpg"
+    },
+    {
+      "id": 23,
+      "categoria": "Drama",
+      "nom": "Parasite",
+      "director": "Bong Joon-ho",
+      "any": 2019,
+      "sinopsi": "Una família pobra s'infiltra en la llar d'una família rica fent-se passar per professionals qualificats, desencadenant una cadena d'esdeveniments tràgics.",
+      "plataformes": ["Netflix", "Filmin"],
+      "imatge": "/public/images/parasite.jpg"
+    },
+    {
+      "id": 24,
+      "categoria": "Drama",
+      "nom": "The Shawshank Redemption",
+      "director": "Frank Darabont",
+      "any": 1994,
+      "sinopsi": "Dos homes empresonats entaulen una amistat al llarg de molts anys, trobant consol i redempció final a través de la decència comuna.",
+      "plataformes": ["HBO Max"],
+      "imatge": "/public/images/shawshank.jpg"
+    },
+    {
+      "id": 25,
+      "categoria": "Drama",
+      "nom": "Schindler's List",
+      "director": "Steven Spielberg",
+      "any": 1993,
+      "sinopsi": "En la Polònia ocupada pels alemanys durant la Segona Guerra Mundial, un empresari intenta salvar els seus treballadors jueus de l'Holocaust.",
+      "plataformes": ["Netflix", "Prime Video"],
+      "imatge": "/public/images/schindler.jpg"
+    },
+
+
+    {
+      "id": 26,
+      "categoria": "Animacio",
+      "nom": "Spider-Man: Un nou univers",
+      "director": "Bob Persichetti",
+      "any": 2018,
+      "sinopsi": "El jove Miles Morales es converteix en l'Spider-Man de la seva realitat i uneix forces amb versions d'altres dimensions.",
+      "plataformes": ["Disney+", "Movistar+"],
+      "imatge": "/public/images/spiderman.jpg"
+    },
+    {
+      "id": 27,
+      "categoria": "Animacio",
+      "nom": "Spirited Away",
+      "director": "Hayao Miyazaki",
+      "any": 2001,
+      "sinopsi": "Una nena de 10 anys es perd en un món poblat per déus i esperits, on ha de treballar per rescatar els seus pares que han estat transformats en porcs.",
+      "plataformes": ["Netflix"],
+      "imatge": "/public/images/spiritedaway.jpg"
+    },
+    {
+      "id": 28,
+      "categoria": "Animacio",
+      "nom": "Coco",
+      "director": "Lee Unkrich",
+      "any": 2017,
+      "sinopsi": "Un jove que somia ser músic viatja a la Terra dels Morts per buscar el seu avantpassat i descobrir la història prohibida de la seva família.",
+      "plataformes": ["Disney+"],
+      "imatge": "/public/images/coco.jpg"
+    },
+    {
+      "id": 29,
+      "categoria": "Animacio",
+      "nom": "Toy Story",
+      "director": "John Lasseter",
+      "any": 1995,
+      "sinopsi": "Un ninot de vaquer se sent amenaçat per l'arribada d'una nova figura d'acció espacial que es converteix en el favorit del seu amo.",
+      "plataformes": ["Disney+"],
+      "imatge": "/public/images/toystory.jpg"
+    },
+    {
+      "id": 30,
+      "categoria": "Animacio",
+      "nom": "Your Name",
+      "director": "Makoto Shinkai",
+      "any": 2016,
+      "sinopsi": "Dos adolescents que viuen en llocs diferents del Japó comencen a intercanviar cossos de manera intermitent, creant un vincle inexplicable.",
+      "plataformes": ["Prime Video"],
+      "imatge": "/public/images/yourname.jpg"
+    }
+  ]
+}

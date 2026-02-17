@@ -1,0 +1,32 @@
+{
+  "Accio": {
+    "fullName": "Acció i Aventures",
+    "image": "/public/categories/accio.jpg",
+    "background": ["#E30613", "#232323"]
+  },
+  "Comedia": {
+    "fullName": "Comèdia i Humour",
+    "image": "/public/categories/comedia.jpg",
+    "background": ["#FFD700", "#FFFFFF"]
+  },
+  "Terror": {
+    "fullName": "Terror i Suspense",
+    "image": "/public/categories/terror.jpg",
+    "background": ["#000000", "#8B0000"]
+  },
+  "Ciencia Ficcio": {
+    "fullName": "Ciència Ficció i Fantasia",
+    "image": "/public/categories/scifi.jpg",
+    "background": ["#1A237E", "#00E5FF"]
+  },
+  "Drama": {
+    "fullName": "Drama i Cinema Clàssic",
+    "image": "/public/categories/drama.jpg",
+    "background": ["#4A148C", "#FFFFFF"]
+  },
+  "Animacio": {
+    "fullName": "Animació i Cinema Familiar",
+    "image": "/public/categories/animacio.jpg",
+    "background": ["#FF6D00", "#FFEB3B"]
+  }
+}
