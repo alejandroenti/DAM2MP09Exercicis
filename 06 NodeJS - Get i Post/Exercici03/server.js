@@ -70,3 +70,14 @@ app.get('/foto/:nom', (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Servidor de l'Exercici 04 corrent a http://localhost:${PORT}`);
 });
+
+// Aturar el servidor correctament 
+process.on('SIGTERM', shutDown);
+process.on('SIGINT', shutDown);
+function shutDown() {
+    // Executar aquí el codi previ al tancament de servidor
+    
+    console.log('Received kill signal, shutting down gracefully');
+    httpServer.close()
+    process.exit(0);
+}
