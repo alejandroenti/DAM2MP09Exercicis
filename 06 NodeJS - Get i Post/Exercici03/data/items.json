@@ -211,7 +211,7 @@
     {
       "id": 21,
       "categoria": "Drama",
-      "nom": "Toro Salvatge",
+      "nom": "Raging Bull",
       "director": "Martin Scorsese",
       "any": 1980,
       "sinopsi": "La història de Jake LaMotta, un boxejador l'ascens del qual al ring es veu enfosquit per la seva vida personal turbulenta.",
@@ -263,7 +263,7 @@
     {
       "id": 26,
       "categoria": "Animacio",
-      "nom": "Spider-Man: Un nou univers",
+      "nom": "Spider-Man: A new universe",
       "director": "Bob Persichetti",
       "any": 2018,
       "sinopsi": "El jove Miles Morales es converteix en l'Spider-Man de la seva realitat i uneix forces amb versions d'altres dimensions.",
