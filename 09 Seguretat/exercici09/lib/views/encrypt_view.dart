@@ -1,20 +1,18 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:encrypt/encrypt.dart';
 import 'package:exercici09/widgets/custom_input.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:pointycastle/api.dart';
 
+// Importaciones de criptografía
+import 'package:encrypt/encrypt.dart' as encrypt_lib;
 import 'package:pointycastle/asymmetric/api.dart';
 import 'package:pointycastle/asymmetric/oaep.dart';
 import 'package:pointycastle/asymmetric/rsa.dart';
+import 'package:pointycastle/api.dart' as pc;
 
-
-
-class EncryptView  extends StatefulWidget {
-
+class EncryptView extends StatefulWidget {
   const EncryptView({super.key});
 
   @override
@@ -22,43 +20,35 @@ class EncryptView  extends StatefulWidget {
 }
 
 class _EncryptViewState extends State<EncryptView> {
-
   final pkCtrl = TextEditingController();
   final fileCtrl = TextEditingController();
 
   String pkPath = "";
   String filePath = "";
+  bool _isProcessing = false;
+
+  // --- Lógica de Encriptación ---
 
   Future<RSAPublicKey> parsePublicKey(String path) async {
     String content = await File(path).readAsString();
-    return RSAKeyParser().parse(content) as RSAPublicKey;
+    return encrypt_lib.RSAKeyParser().parse(content) as RSAPublicKey;
   }
 
-  Future<Uint8List> getBytesFromFile(String filePath) async {
-    return await File(filePath).readAsBytes();
+  Future<void> encryptFile(String filePath, RSAPublicKey pk) async {
+    Uint8List data = await File(filePath).readAsBytes();
+
+    final encryptor = OAEPEncoding(RSAEngine())
+      ..init(true, pc.PublicKeyParameter<RSAPublicKey>(pk)); // true = encrypt
+
+    Uint8List datosEncriptados = _processInBlocks(encryptor, data);
+
+    // Guarda el archivo con extensión .encrypted
+    File encryptedFile = File('$filePath.encrypted');
+    await encryptedFile.writeAsBytes(datosEncriptados);
   }
 
-  void encryptFile(String filePath, RSAPublicKey pk) async {
-    try {
-      Uint8List data = await getBytesFromFile(filePath);
-
-      final encryptor = OAEPEncoding(RSAEngine())
-      ..init(true, PublicKeyParameter<RSAPublicKey>(pk)); // true=encrypt
-
-      Uint8List datosEncriptados = _processInBlocks(encryptor, data);
-
-      File encryptedFile = File('$filePath.encrypted');
-      await encryptedFile.writeAsBytes(datosEncriptados);
-      
-    } catch (e) {
-      print("Error: $e");
-    }
-  }
-
-  Uint8List _processInBlocks(AsymmetricBlockCipher engine, Uint8List input) {
-    final numBlocks = input.length ~/ engine.inputBlockSize +
-        ((input.length % engine.inputBlockSize != 0) ? 1 : 0);
-
+  Uint8List _processInBlocks(pc.AsymmetricBlockCipher engine, Uint8List input) {
+    final numBlocks = (input.length / engine.inputBlockSize).ceil();
     final output = Uint8List(numBlocks * engine.outputBlockSize);
 
     var inputOffset = 0;
@@ -79,65 +69,116 @@ class _EncryptViewState extends State<EncryptView> {
         : output.sublist(0, outputOffset);
   }
 
+  // --- Interfaz ---
+
   @override
-  Widget build(Object context) {
-    return Card(
-      color: Colors.purple,
-      child: Column(
-        children: [
-          Text("Encrypt a file"),
-          Divider(height: 10, thickness: 2,),
-          SizedBox(height: 20),
-          Expanded(
-            child: 
-              CustomInput(
-                label: "Public Key (PEM)",
-                controller: pkCtrl,
-                readOnly: true,
-                onTap: () async {
-                  FilePickerResult? r = await FilePicker.platform.pickFiles();
-                  if (r != null) {
-                    setState(() {
-                      pkCtrl.text = r.files.single.name;
-                      pkPath = r.files.single.path!;
-                    });
-                  }  
-                }
-              )
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text(
+          "Encriptar Archivo",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black54,
+            fontWeight: FontWeight.w500,
           ),
-          Expanded(
-            child: 
-              CustomInput(
-                label: "File to encrypt",
-                controller: fileCtrl,
-                readOnly: true,
-                onTap: () async {
-                  FilePickerResult? r = await FilePicker.platform.pickFiles();
-                  if (r != null) {
-                    setState(() {
-                      fileCtrl.text = r.files.single.name;
-                      filePath = r.files.single.path!;
-                    });
-                  }  
-                }
-              )
-          ),
-          FloatingActionButton(
-            child: Text("Encrypt the file"),
-            onPressed: () async {
-              RSAPublicKey key = await parsePublicKey(pkPath);
-              encryptFile(filePath, key);
+        ),
+        const SizedBox(height: 20),
+        
+        // Selector de Clave Pública
+        CustomInput(
+          label: "Public Key (PEM)",
+          controller: pkCtrl,
+          readOnly: true,
+          onTap: () async {
+            FilePickerResult? r = await FilePicker.platform.pickFiles();
+            if (r != null) {
               setState(() {
-                pkCtrl.text = "";
-                fileCtrl.text = "";
-                pkPath = "";
-                filePath = "";
+                pkCtrl.text = r.files.single.name;
+                pkPath = r.files.single.path!;
               });
             }
-          )
-        ],
-      )
+          },
+        ),
+        const SizedBox(height: 16),
+        
+        // Selector de Archivo a encriptar
+        CustomInput(
+          label: "Archivo a encriptar",
+          controller: fileCtrl,
+          readOnly: true,
+          onTap: () async {
+            FilePickerResult? r = await FilePicker.platform.pickFiles();
+            if (r != null) {
+              setState(() {
+                fileCtrl.text = r.files.single.name;
+                filePath = r.files.single.path!;
+              });
+            }
+          },
+        ),
+        
+        const SizedBox(height: 32),
+
+        _isProcessing 
+          ? const CircularProgressIndicator(color: Color(0xFF6A11CB))
+          : SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF6A11CB), // Color morado principal
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  elevation: 5,
+                ),
+                onPressed: () async {
+                  if (pkPath.isEmpty || filePath.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Selecciona la clave y el archivo")),
+                    );
+                    return;
+                  }
+
+                  setState(() => _isProcessing = true);
+
+                  try {
+                    // 1. Parsear clave
+                    RSAPublicKey key = await parsePublicKey(pkPath);
+                    
+                    // 2. Encriptar (Proceso asíncrono fuera de setState)
+                    await encryptFile(filePath, key);
+
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("¡Archivo encriptado correctamente!")),
+                    );
+
+                    // 3. Limpiar formulario
+                    setState(() {
+                      pkCtrl.clear();
+                      fileCtrl.clear();
+                      pkPath = "";
+                      filePath = "";
+                    });
+                  } catch (e) {
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Error al encriptar: $e")),
+                    );
+                  } finally {
+                    setState(() => _isProcessing = false);
+                  }
+                },
+                icon: const Icon(Icons.lock),
+                label: const Text(
+                  "ENCRIPTAR AHORA",
+                  style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
+                ),
+              ),
+            ),
+      ],
     );
   }
-  
 }

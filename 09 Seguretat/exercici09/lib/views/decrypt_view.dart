@@ -5,6 +5,7 @@ import 'package:exercici09/widgets/custom_input.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
+// Importaciones de criptografía con prefijos para evitar conflictos
 import 'package:pointycastle/api.dart' as pc; 
 import 'package:pointycastle/asymmetric/api.dart';
 import 'package:pointycastle/asymmetric/oaep.dart';
@@ -27,6 +28,8 @@ class _DecryptViewState extends State<DecryptView> {
   String filePath = "";
   String fileDecryptPath = "";
   bool _isProcessing = false;
+
+  // --- Lógica de Desencriptación ---
 
   Future<RSAPrivateKey> parsePrivateKey(String path) async {
     String content = await File(path).readAsString();
@@ -68,117 +71,132 @@ class _DecryptViewState extends State<DecryptView> {
         : output.sublist(0, outputOffset);
   }
 
+  // --- Interfaz Adaptada al Contenedor ---
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.purple,
-      margin: const EdgeInsets.all(16),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0), 
-        child: Column(
-          children: [
-            const Text(
-              "Decrypt a file",
-              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const Divider(height: 20, thickness: 2, color: Colors.white24),
-            const SizedBox(height: 10),
-            
-            CustomInput(
-              label: "Private Key (PEM)",
-              controller: pkCtrl,
-              readOnly: true,
-              onTap: () async {
-                FilePickerResult? r = await FilePicker.platform.pickFiles();
-                if (r != null) {
-                  setState(() {
-                    pkCtrl.text = r.files.single.name;
-                    pkPath = r.files.single.path!;
-                  });
-                }
-              },
-            ),
-            
-            CustomInput(
-              label: "Encrypted file",
-              controller: fileCtrl,
-              readOnly: true,
-              onTap: () async {
-                FilePickerResult? r = await FilePicker.platform.pickFiles();
-                if (r != null) {
-                  setState(() {
-                    fileCtrl.text = r.files.single.name;
-                    filePath = r.files.single.path!;
-                  });
-                }
-              },
-            ),
-            
-            CustomInput(
-              label: "Save as...",
-              controller: fileDecryptCtrl,
-              readOnly: true,
-              onTap: () async {
-                String? outputFile = await FilePicker.platform.saveFile(
-                  dialogTitle: 'Save decrypted file as...',
-                  fileName: 'decrypted_result.png',
-                );
-
-                if (outputFile != null) {
-                  setState(() {
-                    fileDecryptPath = outputFile;
-                    fileDecryptCtrl.text = outputFile.split(Platform.pathSeparator).last;
-                  });
-                }
-              },
-            ),
-            
-            const Spacer(),
-
-            _isProcessing 
-              ? const CircularProgressIndicator(color: Colors.white)
-              : FloatingActionButton.extended(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.purple,
-                  label: const Text("Decrypt Now"),
-                  icon: const Icon(Icons.lock_open),
-                  onPressed: () async {
-                    if (pkPath.isEmpty || filePath.isEmpty || fileDecryptPath.isEmpty) {
-                      return;
-                    }
-
-                    setState(() => _isProcessing = true);
-
-                    try {
-                      RSAPrivateKey key = await parsePrivateKey(pkPath);
-                      await decryptFile(filePath, fileDecryptPath, key);
-
-                      if (!mounted) return;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Success!")),
-                      );
-
-                      setState(() {
-                        pkCtrl.clear();
-                        fileCtrl.clear();
-                        fileDecryptCtrl.clear();
-                        pkPath = "";
-                        filePath = "";
-                        fileDecryptPath = "";
-                      });
-                    } catch (e) {
-                      if (!mounted) return;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Error: $e")),
-                      );
-                    } finally {
-                      setState(() => _isProcessing = false);
-                    }
-                  },
-                ),
-          ],
+    return Column(
+      mainAxisSize: MainAxisSize.min, // Ajusta el tamaño al contenido
+      children: [
+        const Text(
+          "Desencriptar Archivo",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black54,
+            fontWeight: FontWeight.w500,
+          ),
         ),
-      ),
+        const SizedBox(height: 20),
+        
+        CustomInput(
+          label: "Private Key (PEM)",
+          controller: pkCtrl,
+          readOnly: true,
+          onTap: () async {
+            FilePickerResult? r = await FilePicker.platform.pickFiles();
+            if (r != null) {
+              setState(() {
+                pkCtrl.text = r.files.single.name;
+                pkPath = r.files.single.path!;
+              });
+            }
+          },
+        ),
+        const SizedBox(height: 16),
+        
+        CustomInput(
+          label: "Archivo Encriptado",
+          controller: fileCtrl,
+          readOnly: true,
+          onTap: () async {
+            FilePickerResult? r = await FilePicker.platform.pickFiles();
+            if (r != null) {
+              setState(() {
+                fileCtrl.text = r.files.single.name;
+                filePath = r.files.single.path!;
+              });
+            }
+          },
+        ),
+        const SizedBox(height: 16),
+        
+        CustomInput(
+          label: "Guardar como...",
+          controller: fileDecryptCtrl,
+          readOnly: true,
+          onTap: () async {
+            String? outputFile = await FilePicker.platform.saveFile(
+              dialogTitle: 'Selecciona dónde guardar el archivo',
+              fileName: 'archivo_desencriptado.png',
+            );
+
+            if (outputFile != null) {
+              setState(() {
+                fileDecryptPath = outputFile;
+                fileDecryptCtrl.text = outputFile.split(Platform.pathSeparator).last;
+              });
+            }
+          },
+        ),
+        
+        const SizedBox(height: 32),
+
+        _isProcessing 
+          ? const CircularProgressIndicator(color: Color(0xFF6A11CB))
+          : SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2575FC), // Azul para diferenciar de encriptar
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  elevation: 5,
+                ),
+                onPressed: () async {
+                  if (pkPath.isEmpty || filePath.isEmpty || fileDecryptPath.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Completa todos los campos")),
+                    );
+                    return;
+                  }
+
+                  setState(() => _isProcessing = true);
+
+                  try {
+                    RSAPrivateKey key = await parsePrivateKey(pkPath);
+                    await decryptFile(filePath, fileDecryptPath, key);
+
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("¡Archivo desencriptado con éxito!")),
+                    );
+
+                    setState(() {
+                      pkCtrl.clear();
+                      fileCtrl.clear();
+                      fileDecryptCtrl.clear();
+                      pkPath = "";
+                      filePath = "";
+                      fileDecryptPath = "";
+                    });
+                  } catch (e) {
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Error: $e")),
+                    );
+                  } finally {
+                    setState(() => _isProcessing = false);
+                  }
+                },
+                icon: const Icon(Icons.lock_open),
+                label: const Text(
+                  "DESENCRIPTAR AHORA",
+                  style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
+                ),
+              ),
+            ),
+      ],
     );
   }
 }
