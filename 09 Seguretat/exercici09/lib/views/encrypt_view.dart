@@ -5,7 +5,6 @@ import 'package:exercici09/widgets/custom_input.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-// Importaciones de criptografía
 import 'package:encrypt/encrypt.dart' as encrypt_lib;
 import 'package:pointycastle/asymmetric/api.dart';
 import 'package:pointycastle/asymmetric/oaep.dart';
@@ -27,8 +26,6 @@ class _EncryptViewState extends State<EncryptView> {
   String filePath = "";
   bool _isProcessing = false;
 
-  // --- Lógica de Encriptación ---
-
   Future<RSAPublicKey> parsePublicKey(String path) async {
     String content = await File(path).readAsString();
     return encrypt_lib.RSAKeyParser().parse(content) as RSAPublicKey;
@@ -38,11 +35,10 @@ class _EncryptViewState extends State<EncryptView> {
     Uint8List data = await File(filePath).readAsBytes();
 
     final encryptor = OAEPEncoding(RSAEngine())
-      ..init(true, pc.PublicKeyParameter<RSAPublicKey>(pk)); // true = encrypt
+      ..init(true, pc.PublicKeyParameter<RSAPublicKey>(pk));
 
     Uint8List datosEncriptados = _processInBlocks(encryptor, data);
 
-    // Guarda el archivo con extensión .encrypted
     File encryptedFile = File('$filePath.encrypted');
     await encryptedFile.writeAsBytes(datosEncriptados);
   }
@@ -69,7 +65,6 @@ class _EncryptViewState extends State<EncryptView> {
         : output.sublist(0, outputOffset);
   }
 
-  // --- Interfaz ---
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +72,7 @@ class _EncryptViewState extends State<EncryptView> {
       mainAxisSize: MainAxisSize.min,
       children: [
         const Text(
-          "Encriptar Archivo",
+          "Encriptar Arxiu",
           style: TextStyle(
             fontSize: 18,
             color: Colors.black54,
@@ -86,7 +81,6 @@ class _EncryptViewState extends State<EncryptView> {
         ),
         const SizedBox(height: 20),
         
-        // Selector de Clave Pública
         CustomInput(
           label: "Public Key (PEM)",
           controller: pkCtrl,
@@ -103,9 +97,8 @@ class _EncryptViewState extends State<EncryptView> {
         ),
         const SizedBox(height: 16),
         
-        // Selector de Archivo a encriptar
         CustomInput(
-          label: "Archivo a encriptar",
+          label: "Arxiu a encriptar",
           controller: fileCtrl,
           readOnly: true,
           onTap: () async {
@@ -128,7 +121,7 @@ class _EncryptViewState extends State<EncryptView> {
               height: 55,
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6A11CB), // Color morado principal
+                  backgroundColor: const Color(0xFF6A11CB),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                   elevation: 5,
@@ -136,7 +129,7 @@ class _EncryptViewState extends State<EncryptView> {
                 onPressed: () async {
                   if (pkPath.isEmpty || filePath.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Selecciona la clave y el archivo")),
+                      const SnackBar(content: Text("Selecciona la clau i l'arxiu")),
                     );
                     return;
                   }
@@ -144,18 +137,14 @@ class _EncryptViewState extends State<EncryptView> {
                   setState(() => _isProcessing = true);
 
                   try {
-                    // 1. Parsear clave
                     RSAPublicKey key = await parsePublicKey(pkPath);
-                    
-                    // 2. Encriptar (Proceso asíncrono fuera de setState)
                     await encryptFile(filePath, key);
 
                     if (!mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("¡Archivo encriptado correctamente!")),
+                      const SnackBar(content: Text("Arxiu encriptat correctament!")),
                     );
 
-                    // 3. Limpiar formulario
                     setState(() {
                       pkCtrl.clear();
                       fileCtrl.clear();
@@ -173,7 +162,7 @@ class _EncryptViewState extends State<EncryptView> {
                 },
                 icon: const Icon(Icons.lock),
                 label: const Text(
-                  "ENCRIPTAR AHORA",
+                  "ENCRIPTAR ARA",
                   style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
                 ),
               ),

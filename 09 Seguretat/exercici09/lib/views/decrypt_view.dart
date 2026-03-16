@@ -5,7 +5,6 @@ import 'package:exercici09/widgets/custom_input.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-// Importaciones de criptografía con prefijos para evitar conflictos
 import 'package:pointycastle/api.dart' as pc; 
 import 'package:pointycastle/asymmetric/api.dart';
 import 'package:pointycastle/asymmetric/oaep.dart';
@@ -28,8 +27,6 @@ class _DecryptViewState extends State<DecryptView> {
   String filePath = "";
   String fileDecryptPath = "";
   bool _isProcessing = false;
-
-  // --- Lógica de Desencriptación ---
 
   Future<RSAPrivateKey> parsePrivateKey(String path) async {
     String content = await File(path).readAsString();
@@ -71,15 +68,13 @@ class _DecryptViewState extends State<DecryptView> {
         : output.sublist(0, outputOffset);
   }
 
-  // --- Interfaz Adaptada al Contenedor ---
-
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min, // Ajusta el tamaño al contenido
+      mainAxisSize: MainAxisSize.min,
       children: [
         const Text(
-          "Desencriptar Archivo",
+          "Desencriptar Arxiu",
           style: TextStyle(
             fontSize: 18,
             color: Colors.black54,
@@ -105,7 +100,7 @@ class _DecryptViewState extends State<DecryptView> {
         const SizedBox(height: 16),
         
         CustomInput(
-          label: "Archivo Encriptado",
+          label: "Archivo Encriptat",
           controller: fileCtrl,
           readOnly: true,
           onTap: () async {
@@ -121,13 +116,13 @@ class _DecryptViewState extends State<DecryptView> {
         const SizedBox(height: 16),
         
         CustomInput(
-          label: "Guardar como...",
+          label: "Guardar com...",
           controller: fileDecryptCtrl,
           readOnly: true,
           onTap: () async {
             String? outputFile = await FilePicker.platform.saveFile(
-              dialogTitle: 'Selecciona dónde guardar el archivo',
-              fileName: 'archivo_desencriptado.png',
+              dialogTitle: 'Selecciona ón guardar l\'arxiu',
+              fileName: 'arxiu_desencriptat.png',
             );
 
             if (outputFile != null) {
@@ -148,7 +143,7 @@ class _DecryptViewState extends State<DecryptView> {
               height: 55,
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2575FC), // Azul para diferenciar de encriptar
+                  backgroundColor: const Color(0xFF2575FC),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                   elevation: 5,
@@ -156,7 +151,7 @@ class _DecryptViewState extends State<DecryptView> {
                 onPressed: () async {
                   if (pkPath.isEmpty || filePath.isEmpty || fileDecryptPath.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Completa todos los campos")),
+                      const SnackBar(content: Text("Emplena todos los camps")),
                     );
                     return;
                   }
@@ -169,7 +164,7 @@ class _DecryptViewState extends State<DecryptView> {
 
                     if (!mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("¡Archivo desencriptado con éxito!")),
+                      const SnackBar(content: Text("Arxiu desencriptat amb èxit!")),
                     );
 
                     setState(() {
@@ -191,7 +186,7 @@ class _DecryptViewState extends State<DecryptView> {
                 },
                 icon: const Icon(Icons.lock_open),
                 label: const Text(
-                  "DESENCRIPTAR AHORA",
+                  "DESENCRIPTAR ARA",
                   style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
                 ),
               ),
