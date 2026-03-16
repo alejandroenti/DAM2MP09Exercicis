@@ -91,7 +91,7 @@ class _EncryptViewState extends State<EncryptView> {
           Expanded(
             child: 
               CustomInput(
-                label: "Public Key (RSA)",
+                label: "Public Key (PEM)",
                 controller: pkCtrl,
                 readOnly: true,
                 onTap: () async {
