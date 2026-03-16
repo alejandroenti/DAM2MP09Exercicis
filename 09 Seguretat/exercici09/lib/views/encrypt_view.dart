@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -7,15 +6,11 @@ import 'package:exercici09/widgets/custom_input.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pointycastle/api.dart';
-import 'package:pointycastle/asn1/asn1_parser.dart';
-import 'package:pointycastle/asn1/primitives/asn1_bit_string.dart';
-import 'package:pointycastle/asn1/primitives/asn1_integer.dart';
-import 'package:pointycastle/asn1/primitives/asn1_sequence.dart';
+
 import 'package:pointycastle/asymmetric/api.dart';
 import 'package:pointycastle/asymmetric/oaep.dart';
 import 'package:pointycastle/asymmetric/rsa.dart';
-import 'package:pointycastle/asymmetric/api.dart';
-import 'package:pointycastle/asymmetric/api.dart';
+
 
 
 class EncryptView  extends StatefulWidget {
@@ -129,17 +124,15 @@ class _EncryptViewState extends State<EncryptView> {
           ),
           FloatingActionButton(
             child: Text("Encrypt the file"),
-            onPressed: () => {
-              setState(() async {
-                
-                RSAPublicKey key = await parsePublicKey(pkPath);
-                encryptFile(filePath, key);
-
+            onPressed: () async {
+              RSAPublicKey key = await parsePublicKey(pkPath);
+              encryptFile(filePath, key);
+              setState(() {
                 pkCtrl.text = "";
                 fileCtrl.text = "";
                 pkPath = "";
                 filePath = "";
-              })
+              });
             }
           )
         ],
