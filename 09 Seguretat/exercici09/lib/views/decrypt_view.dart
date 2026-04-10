@@ -100,7 +100,7 @@ class _DecryptViewState extends State<DecryptView> {
         const SizedBox(height: 16),
         
         CustomInput(
-          label: "Archivo Encriptat",
+          label: "Arxiu Encriptat",
           controller: fileCtrl,
           readOnly: true,
           onTap: () async {
